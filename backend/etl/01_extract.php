@@ -19,8 +19,11 @@ function fetchEnergyRadioData() {
     return json_decode($response, true);
 }
 
-echo '<pre>';
+/*echo '<pre>';
 var_dump(fetchEnergyRadioData());
-echo '</pre>';
+echo '</pre>';*/
+
+
+return fetchEnergyRadioData();
 
 ?>
