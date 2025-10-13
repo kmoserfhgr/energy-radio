@@ -6,8 +6,10 @@ $data = include('02_transform.php');
 print_r($data);
 echo '</pre>';*/
 
+// -> Datenbank zugangsdaten einbinden
 require_once '../config.php';
 
+// -> verbindung mit der Datenbank
 try {
     $pdo = new PDO($dsn, $username, $password, $options);
     $sql = "INSERT INTO energy_radio (title, artist, playfrom, audiourl) VALUES (?, ?, ?, ?)";
