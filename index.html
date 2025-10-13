@@ -10,7 +10,7 @@
 <body>
     <!-- Mode Auswahl Artist & Songs -->
     <header class="header">
-    <div class="header-left">
+    <div class="header-left-top">
       <h1>
         Radio Energy's top 
         <span class="mode-check">
@@ -25,25 +25,132 @@
       </h1>
     </div>
 
-    <div class="header-right">
+    <div class="header-right-top">
       <img src="images/energy_logo.svg" class="logo">
     </div>
 
+    <!-- Auswahl Tag, Woche, Monat -->
 
+    <div class="header-left-bottom">
+        <span class="timespan-check">
+            <input class="timespan-check-input" type="radio" name="timespan" id="des_tages">
+            <label class="timespan-check-label" for="des_tages">...des Tages</label>
+        </span>
+        <span class="timespan-check">
+            <input class="timespan-check-input" type="radio" name="timespan" id="der_woche">
+            <label class="timespan-check-label" for="der_woche">...der Woche</label>
+        </span>
+        <span class="timespan-check">
+            <input class="timespan-check-input" type="radio" name="timespan" id="des_monats">
+            <label class="timespan-check-label" for="des_monats">...des Monats</label>
+        </span>
 
-
+    <!-- Auswahl Stichtag (date) -->
+    <div class="header-right-bottom">
+        <input type="date" name="datepicker" id="datepicker">
+    </div>
   </header>
 
 
+
+<!-- PODEST SONGS -->
+    <section class="podium-songs" aria-label="Top 3 Songs">
+    
+    <!-- Platz 2 -->
+    <article class="podium-box rank-2">
+        <header class="podium-header">
+        <h2 class="song-title">Song XY</h2>
+        <p class="artist-name">Name Artist</p>
+        </header>
+        <div class="podium-body">
+        <div class="star">
+            <span class="rank-number">2</span>
+        </div>
+        <p class="plays">X Abspielungen</p>
+        </div>
+    </article>
+
+    <!-- Platz 1 -->
+    <article class="podium-box rank-1">
+        <header class="podium-header">
+        <h2 class="song-title">Song XY</h2>
+        <p class="artist-name">Name Artist</p>
+        </header>
+        <div class="podium-body">
+        <div class="star">
+            <span class="rank-number">1</span>
+        </div>
+        <p class="plays">X Abspielungen</p>
+        </div>
+    </article>
+
+    <!-- Platz 3 -->
+    <article class="podium-box rank-3">
+        <header class="podium-header">
+        <h2 class="song-title">Song XY</h2>
+        <p class="artist-name">Name Artist</p>
+        </header>
+        <div class="podium-body">
+        <div class="star">
+            <span class="rank-number">3</span>
+        </div>
+        <p class="plays">X Abspielungen</p>
+        </div>
+    </article>
+
+    </section>
+
+
+
+
+<!-- PODEST ARTIST -->
+    <section class="podium-artist" aria-label="Top 3 Artists">
+    
+    <!-- Platz 2 -->
+    <article class="podium-box rank-2">
+        <header class="podium-header">
+        <h2 class="name-artist">Name Artist</h2>
+        </header>
+        <div class="podium-body">
+        <div class="star">
+            <span class="rank-number">2</span>
+        </div>
+        <p class="plays">X Abspielungen</p>
+        </div>
+    </article>
+
+    <!-- Platz 1 -->
+    <article class="podium-box rank-1">
+        <header class="podium-header">
+        <h2 class="name-artist">Name Artist</h2>
+        </header>
+        <div class="podium-body">
+        <div class="star">
+            <span class="rank-number">1</span>
+        </div>
+        <p class="plays">X Abspielungen</p>
+        </div>
+    </article>
+
+    <!-- Platz 3 -->
+    <article class="podium-box rank-3">
+        <header class="podium-header">
+        <h2 class="name-artist">Name Artist</h2>
+        </header>
+        <div class="podium-body">
+        <div class="star">
+            <span class="rank-number">3</span>
+        </div>
+        <p class="plays">X Abspielungen</p>
+        </div>
+    </article>
+    </section>
    
 
 
 
 
 
-
-
-    <input type="date" name="datepicker" id="datepicker">
     <script type="module" src="script.js"></script>
 </body>
 </html>
