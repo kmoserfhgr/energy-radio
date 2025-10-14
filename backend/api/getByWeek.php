@@ -29,7 +29,22 @@ try {
     ]);
 
     $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-    echo json_encode($result);
+
+        // alle titles und artists zählen
+    $titles = array_count_values(array_column($result, 'title'));
+    $artists = array_count_values(array_column($result, 'artist'));
+
+    // Top 3 absteigend sortieren
+    arsort($titles); $titles = array_slice($titles, 0, 3, true);
+    arsort($artists); $artists = array_slice($artists, 0, 3, true);
+
+    // Top 3 Ausgabe als JSON
+    echo json_encode([
+        'top_titles' => $titles,
+        'top_artists' => $artists
+    ]);
+
+    /*echo json_encode($result);*/
 
 } catch (PDOException $e) {
     die("Verbindung zur Datenbank konnte nicht hergestellt werden: " . $e->getMessage());
