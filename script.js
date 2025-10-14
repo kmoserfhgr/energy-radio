@@ -1,40 +1,49 @@
 
-// FUNKTIONEN
+// --------------------- DATEN -----------------
 
 // des Tages
 async function getByDate(date) {
     const url = `https://energy-radio.kaya-moser.ch/backend/api/getByDate.php?date=${date}`;
-    try {
-        const response = await fetch(url);
-        const data = await response.json();
-        console.log(data); // gibt die Daten der API in der Konsole aus
     
-        
-        // ------------------ HTML mit Daten ausfüllen------------------
-        if (mode === "songs") {
-          document.querySelector(".podium-box-1 .mode-title").innerText = data.top_titles[0].title;
-          document.querySelector(".podium-box-1 .artist-name").innerText = data.top_titles[0].artist;
-          document.querySelector(".podium-box-1 .plays").innerText = `${data.top_titles[0].count ?? ""} Abspielungen`;
+    // Mode aus dem Radio-Button holen
+    const modeInput = document.querySelector('input[name="mode"]:checked');
+    const mode = modeInput ? modeInput.value : "songs"; // default "songs" falls nichts ausgewählt
 
-          document.querySelector(".podium-box-2 .mode-title").innerText = data.top_titles[1].title;
-          document.querySelector(".podium-box-2 .artist-name").innerText = data.top_titles[1].artist;
-          document.querySelector(".podium-box-2 .plays").innerText = `${data.top_titles[1].count ?? ""} Abspielungen`;
+      try {
+          const response = await fetch(url);
+          const data = await response.json();
+          console.log(data); // gibt die Daten der API in der Konsole aus
+      
+          
+          // HTML mit Daten ausfüllen
+          if (mode === "songs") {
+            document.querySelector(".podium-box-1 .mode-title").innerText = data.top_titles[0].title;
+            document.querySelector(".podium-box-1 .artist-name").innerText = data.top_titles[0].artist;
+            document.querySelector(".podium-box-1 .plays").innerText = `${data.top_titles[0].count ?? ""} Abspielungen`;
+            
 
-          document.querySelector(".podium-box-3 .mode-title").innerText = data.top_titles[2].title;
-          document.querySelector(".podium-box-3 .artist-name").innerText = data.top_titles[2].artist;
-          document.querySelector(".podium-box-3 .plays").innerText = `${data.top_titles[2].count ?? ""} Abspielungen`;
+            document.querySelector(".podium-box-2 .mode-title").innerText = data.top_titles[1].title;
+            document.querySelector(".podium-box-2 .artist-name").innerText = data.top_titles[1].artist;
+            document.querySelector(".podium-box-2 .plays").innerText = `${data.top_titles[1].count ?? ""} Abspielungen`;
 
-        } 
-        else if (mode === "artist") {
-          document.querySelector(".podium-box-1 .mode-title").innerText = data.top_artists[0].artist;
-          document.querySelector(".podium-box-1 .plays").innerText = `${data.top_artists[0].count ?? ""} Abspielungen`;
+            document.querySelector(".podium-box-3 .mode-title").innerText = data.top_titles[2].title;
+            document.querySelector(".podium-box-3 .artist-name").innerText = data.top_titles[2].artist;
+            document.querySelector(".podium-box-3 .plays").innerText = `${data.top_titles[2].count ?? ""} Abspielungen`;
 
-          document.querySelector(".podium-box-2 .mode-title").innerText = data.top_artists[1].artist;
-          document.querySelector(".podium-box-2 .plays").innerText = `${data.top_artists[1].count ?? ""} Abspielungen`;
+          } 
+          else if (mode === "artist") {
+            document.querySelector(".podium-box-1 .mode-title").innerText = data.top_artists[0].artist;
+            document.querySelector(".podium-box-1 .artist-name").innerText = "";
+            document.querySelector(".podium-box-1 .plays").innerText = `${data.top_artists[0].count ?? ""} Abspielungen`;
 
-          document.querySelector(".podium-box-3 .mode-title").innerText = data.top_artists[2].artist;
-          document.querySelector(".podium-box-3 .plays").innerText = `${data.top_artists[2].count ?? ""} Abspielungen`;
-        }
+            document.querySelector(".podium-box-2 .mode-title").innerText = data.top_artists[1].artist;
+            document.querySelector(".podium-box-2 .artist-name").innerText = "";
+            document.querySelector(".podium-box-2 .plays").innerText = `${data.top_artists[1].count ?? ""} Abspielungen`;
+
+            document.querySelector(".podium-box-3 .mode-title").innerText = data.top_artists[2].artist;
+            document.querySelector(".podium-box-3 .artist-name").innerText = "";
+            document.querySelector(".podium-box-3 .plays").innerText = `${data.top_artists[2].count ?? ""} Abspielungen`;
+          }
 
     } catch (error) {
         console.error(error)
@@ -45,10 +54,45 @@ async function getByDate(date) {
 // der Woche
 async function getByWeek(date) {
     const url = `https://energy-radio.kaya-moser.ch/backend/api/getByWeek.php?date=${date}`;
+
+ // Mode aus dem Radio-Button holen
+    const modeInput = document.querySelector('input[name="mode"]:checked');
+    const mode = modeInput ? modeInput.value : "songs"; // default "songs" falls nichts ausgewählt
+
     try {
         const response = await fetch(url);
         const data = await response.json();
         console.log(data); // gibt die Daten der API in der Konsole aus
+
+        // HTML mit Daten ausfüllen
+          if (mode === "songs") {
+            document.querySelector(".podium-box-1 .mode-title").innerText = data.top_titles[0].title;
+            document.querySelector(".podium-box-1 .artist-name").innerText = data.top_titles[0].artist;
+            document.querySelector(".podium-box-1 .plays").innerText = `${data.top_titles[0].count ?? ""} Abspielungen`;
+
+            document.querySelector(".podium-box-2 .mode-title").innerText = data.top_titles[1].title;
+            document.querySelector(".podium-box-2 .artist-name").innerText = data.top_titles[1].artist;
+            document.querySelector(".podium-box-2 .plays").innerText = `${data.top_titles[1].count ?? ""} Abspielungen`;
+
+            document.querySelector(".podium-box-3 .mode-title").innerText = data.top_titles[2].title;
+            document.querySelector(".podium-box-3 .artist-name").innerText = data.top_titles[2].artist;
+            document.querySelector(".podium-box-3 .plays").innerText = `${data.top_titles[2].count ?? ""} Abspielungen`;
+
+          } 
+          else if (mode === "artist") {
+            document.querySelector(".podium-box-1 .mode-title").innerText = data.top_artists[0].artist;
+            document.querySelector(".podium-box-1 .artist-name").innerText = "";
+            document.querySelector(".podium-box-1 .plays").innerText = `${data.top_artists[0].count ?? ""} Abspielungen`;
+
+            document.querySelector(".podium-box-2 .mode-title").innerText = data.top_artists[1].artist;
+            document.querySelector(".podium-box-2 .artist-name").innerText = "";
+            document.querySelector(".podium-box-2 .plays").innerText = `${data.top_artists[1].count ?? ""} Abspielungen`;
+
+            document.querySelector(".podium-box-3 .mode-title").innerText = data.top_artists[2].artist;
+            document.querySelector(".podium-box-3 .artist-name").innerText = "";
+            document.querySelector(".podium-box-3 .plays").innerText = `${data.top_artists[2].count ?? ""} Abspielungen`;
+          }
+
     } catch (error) {
         console.error(error)
     }
@@ -56,18 +100,52 @@ async function getByWeek(date) {
 
 // des Monats
 async function getByMonth(date) {
-    const url = `https://energy-radio.kaya-moser.ch/backend/api/getByDate.php?date=${date}`;
+    const url = `https://energy-radio.kaya-moser.ch/backend/api/getByMonth.php?date=${date}`;
+
+     // Mode aus dem Radio-Button holen
+    const modeInput = document.querySelector('input[name="mode"]:checked');
+    const mode = modeInput ? modeInput.value : "songs"; // default "songs" falls nichts ausgewählt
+
     try {
         const response = await fetch(url);
         const data = await response.json();
         console.log(data); // gibt die Daten der API in der Konsole aus
+
+        // HTML mit Daten ausfüllen
+          if (mode === "songs") {
+            document.querySelector(".podium-box-1 .mode-title").innerText = data.top_titles[0].title;
+            document.querySelector(".podium-box-1 .artist-name").innerText = data.top_titles[0].artist;
+            document.querySelector(".podium-box-1 .plays").innerText = `${data.top_titles[0].count ?? ""} Abspielungen`;
+
+            document.querySelector(".podium-box-2 .mode-title").innerText = data.top_titles[1].title;
+            document.querySelector(".podium-box-2 .artist-name").innerText = data.top_titles[1].artist;
+            document.querySelector(".podium-box-2 .plays").innerText = `${data.top_titles[1].count ?? ""} Abspielungen`;
+
+            document.querySelector(".podium-box-3 .mode-title").innerText = data.top_titles[2].title;
+            document.querySelector(".podium-box-3 .artist-name").innerText = data.top_titles[2].artist;
+            document.querySelector(".podium-box-3 .plays").innerText = `${data.top_titles[2].count ?? ""} Abspielungen`;
+
+          } 
+          else if (mode === "artist") {
+            document.querySelector(".podium-box-1 .mode-title").innerText = data.top_artists[0].artist;
+            document.querySelector(".podium-box-1 .artist-name").innerText = "";
+            document.querySelector(".podium-box-1 .plays").innerText = `${data.top_artists[0].count ?? ""} Abspielungen`;
+
+            document.querySelector(".podium-box-2 .mode-title").innerText = data.top_artists[1].artist;
+            document.querySelector(".podium-box-2 .artist-name").innerText = "";
+            document.querySelector(".podium-box-2 .plays").innerText = `${data.top_artists[1].count ?? ""} Abspielungen`;
+
+            document.querySelector(".podium-box-3 .mode-title").innerText = data.top_artists[2].artist;
+            document.querySelector(".podium-box-3 .artist-name").innerText = "";
+            document.querySelector(".podium-box-3 .plays").innerText = `${data.top_artists[2].count ?? ""} Abspielungen`;
+          }
     } catch (error) {
         console.error(error)
     }
 }
 
 
-// AUSWAHL DER MODI (mode, timespan, date)
+// --------------- AUSWAHL DER MODI (mode, timespan, date)----------------
 
 document.addEventListener("DOMContentLoaded", () => {
 
