@@ -1,4 +1,5 @@
 
+// FUNKTIONEN
 
 // des Tages
 async function getByDate(date) {
@@ -37,7 +38,7 @@ async function getByMonth(date) {
 }
 
 
-// Auswahl der Modi (mode, timespan, date)
+// AUSWAHL DER MODI (mode, timespan, date)
 
 document.addEventListener("DOMContentLoaded", () => {
 
@@ -96,4 +97,30 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Initialer Aufruf
   handleSelectionChange();
+
+
+
+// TOP 3 HERAUSFINDEN
+
+async function getTop3(date, type) {
+  const url = `https://energy-radio.kaya-moser.ch/backend/api/${type}.php?date=${date}`;
+  try {
+    const res = await fetch(url);
+    const data = await res.json();
+    const count = {};
+    data.forEach(d => {
+      const key = `${d.title} - ${d.artist}`;
+      count[key] = (count[key] || 0) + 1;
+    });
+    const top3 = Object.entries(count)
+      .map(([k, v]) => ({ song: k, plays: v }))
+      .sort((a, b) => b.plays - a.plays)
+      .slice(0, 3);
+    console.log("Top 3:", top3);
+  } catch (e) {
+    console.error(e);
+  }
+}
+
+
 });
