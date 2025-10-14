@@ -8,9 +8,38 @@ async function getByDate(date) {
         const response = await fetch(url);
         const data = await response.json();
         console.log(data); // gibt die Daten der API in der Konsole aus
+    
+        
+        // ------------------ HTML mit Daten ausfüllen------------------
+        if (mode === "songs") {
+          document.querySelector(".podium-box-1 .mode-title").innerText = data.top_titles[0].title;
+          document.querySelector(".podium-box-1 .artist-name").innerText = data.top_titles[0].artist;
+          document.querySelector(".podium-box-1 .plays").innerText = `${data.top_titles[0].count ?? ""} Abspielungen`;
+
+          document.querySelector(".podium-box-2 .mode-title").innerText = data.top_titles[1].title;
+          document.querySelector(".podium-box-2 .artist-name").innerText = data.top_titles[1].artist;
+          document.querySelector(".podium-box-2 .plays").innerText = `${data.top_titles[1].count ?? ""} Abspielungen`;
+
+          document.querySelector(".podium-box-3 .mode-title").innerText = data.top_titles[2].title;
+          document.querySelector(".podium-box-3 .artist-name").innerText = data.top_titles[2].artist;
+          document.querySelector(".podium-box-3 .plays").innerText = `${data.top_titles[2].count ?? ""} Abspielungen`;
+
+        } 
+        else if (mode === "artist") {
+          document.querySelector(".podium-box-1 .mode-title").innerText = data.top_artists[0].artist;
+          document.querySelector(".podium-box-1 .plays").innerText = `${data.top_artists[0].count ?? ""} Abspielungen`;
+
+          document.querySelector(".podium-box-2 .mode-title").innerText = data.top_artists[1].artist;
+          document.querySelector(".podium-box-2 .plays").innerText = `${data.top_artists[1].count ?? ""} Abspielungen`;
+
+          document.querySelector(".podium-box-3 .mode-title").innerText = data.top_artists[2].artist;
+          document.querySelector(".podium-box-3 .plays").innerText = `${data.top_artists[2].count ?? ""} Abspielungen`;
+        }
+
     } catch (error) {
         console.error(error)
     }
+ 
 }
 
 // der Woche
