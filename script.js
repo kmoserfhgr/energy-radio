@@ -20,6 +20,7 @@ async function getByDate(date) {
             document.querySelector(".podium-box-1 .mode-title").innerText = data.top_titles[0].title;
             document.querySelector(".podium-box-1 .artist-name").innerText = data.top_titles[0].artist;
             document.querySelector(".podium-box-1 .plays").innerText = `${data.top_titles[0].count ?? ""} Abspielungen`;
+            new Audio(data.top_titles[0].audiourl).play();
             
 
             document.querySelector(".podium-box-2 .mode-title").innerText = data.top_titles[1].title;
@@ -69,6 +70,7 @@ async function getByWeek(date) {
             document.querySelector(".podium-box-1 .mode-title").innerText = data.top_titles[0].title;
             document.querySelector(".podium-box-1 .artist-name").innerText = data.top_titles[0].artist;
             document.querySelector(".podium-box-1 .plays").innerText = `${data.top_titles[0].count ?? ""} Abspielungen`;
+            new Audio(data.top_titles[0].audiourl).play();
 
             document.querySelector(".podium-box-2 .mode-title").innerText = data.top_titles[1].title;
             document.querySelector(".podium-box-2 .artist-name").innerText = data.top_titles[1].artist;
@@ -116,6 +118,7 @@ async function getByMonth(date) {
             document.querySelector(".podium-box-1 .mode-title").innerText = data.top_titles[0].title;
             document.querySelector(".podium-box-1 .artist-name").innerText = data.top_titles[0].artist;
             document.querySelector(".podium-box-1 .plays").innerText = `${data.top_titles[0].count ?? ""} Abspielungen`;
+            new Audio(data.top_titles[0].audiourl).play();
 
             document.querySelector(".podium-box-2 .mode-title").innerText = data.top_titles[1].title;
             document.querySelector(".podium-box-2 .artist-name").innerText = data.top_titles[1].artist;
