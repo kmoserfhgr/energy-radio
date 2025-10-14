@@ -85,15 +85,15 @@ document.addEventListener("DOMContentLoaded", () => {
     console.log("Zeitraum:", timespan);
     console.log("Datum:", date);
 
-    // Beispiel: URL aufbauen oder API-Call vorbereiten
-    const baseUrl = "https://energy-radio.kaya-moser.ch/";
-    const url = `${baseUrl}?mode=${mode}&timespan=${timespan}&date=${date}`;
-    console.log("→ Aufruf:", url);
+   // Bedingung: je nach timespan andere Funktion aufrufen
+    if (timespan === "des_tages") {
+      getByDate(date);
+    } else if (timespan === "der_woche") {
+      getByWeek(date);
+    } else if (timespan === "des_monats") {
+      getByMonth(date);
+  }}
 
-
-    // Später: fetch(url) oder window.location.href = url;
-  }
-
-  // ---- Initialer Aufruf mit Defaults ----
+  // Initialer Aufruf
   handleSelectionChange();
 });
