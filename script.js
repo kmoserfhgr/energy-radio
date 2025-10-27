@@ -1,5 +1,6 @@
 
 // --------------------- DATEN -----------------
+let audio = null;
 
 // des Tages
 async function getByDate(date) {
@@ -13,15 +14,15 @@ async function getByDate(date) {
           const response = await fetch(url);
           const data = await response.json();
           console.log(data); // gibt die Daten der API in der Konsole aus
-      
+          if(audio){audio.pause()}
           
           // HTML mit Daten ausfüllen
           if (mode === "songs") {
             document.querySelector(".podium-box-1 .mode-title").innerText = data.top_titles[0].title;
             document.querySelector(".podium-box-1 .artist-name").innerText = data.top_titles[0].artist;
             document.querySelector(".podium-box-1 .plays").innerText = `${data.top_titles[0].count ?? ""} Abspielungen`;
-            new Audio(data.top_titles[0].audiourl).play();
-            
+            audio =  new Audio(data.top_titles[0].audiourl);
+            audio.play()
 
             document.querySelector(".podium-box-2 .mode-title").innerText = data.top_titles[1].title;
             document.querySelector(".podium-box-2 .artist-name").innerText = data.top_titles[1].artist;
@@ -64,13 +65,15 @@ async function getByWeek(date) {
         const response = await fetch(url);
         const data = await response.json();
         console.log(data); // gibt die Daten der API in der Konsole aus
+        if(audio){audio.pause()}
 
         // HTML mit Daten ausfüllen
           if (mode === "songs") {
             document.querySelector(".podium-box-1 .mode-title").innerText = data.top_titles[0].title;
             document.querySelector(".podium-box-1 .artist-name").innerText = data.top_titles[0].artist;
             document.querySelector(".podium-box-1 .plays").innerText = `${data.top_titles[0].count ?? ""} Abspielungen`;
-            new Audio(data.top_titles[0].audiourl).play();
+            audio =  new Audio(data.top_titles[0].audiourl);
+            audio.play()
 
             document.querySelector(".podium-box-2 .mode-title").innerText = data.top_titles[1].title;
             document.querySelector(".podium-box-2 .artist-name").innerText = data.top_titles[1].artist;
@@ -112,13 +115,15 @@ async function getByMonth(date) {
         const response = await fetch(url);
         const data = await response.json();
         console.log(data); // gibt die Daten der API in der Konsole aus
-
+        if(audio){audio.pause()}
+        
         // HTML mit Daten ausfüllen
           if (mode === "songs") {
             document.querySelector(".podium-box-1 .mode-title").innerText = data.top_titles[0].title;
             document.querySelector(".podium-box-1 .artist-name").innerText = data.top_titles[0].artist;
             document.querySelector(".podium-box-1 .plays").innerText = `${data.top_titles[0].count ?? ""} Abspielungen`;
-            new Audio(data.top_titles[0].audiourl).play();
+            audio =  new Audio(data.top_titles[0].audiourl);
+            audio.play()
 
             document.querySelector(".podium-box-2 .mode-title").innerText = data.top_titles[1].title;
             document.querySelector(".podium-box-2 .artist-name").innerText = data.top_titles[1].artist;
