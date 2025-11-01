@@ -40,6 +40,7 @@ async function getBy(period, date) {
       document.querySelector(".podium-box-3 .mode-title").innerText = data.top_titles[2].title;
       document.querySelector(".podium-box-3 .artist-name").innerText = data.top_titles[2].artist;
       document.querySelector(".podium-box-3 .plays").innerText = `${data.top_titles[2].count ?? ""} Abspielungen`;
+
     } else if (mode === "artist") {
       document.querySelector(".podium-box-1 .mode-title").innerText = data.top_artists[0].artist;
       document.querySelector(".podium-box-1 .artist-name").innerText = "";
@@ -58,7 +59,7 @@ async function getBy(period, date) {
   }
 }
 
-// Schlanke Wrapper fuer bestehende Aufrufe
+// Wrapper für bestehende Aufrufe
 const getByDate  = (date) => getBy("date",  date);
 const getByWeek  = (date) => getBy("week",  date);
 const getByMonth = (date) => getBy("month", date);
