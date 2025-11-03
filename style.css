@@ -4,14 +4,20 @@
 :root{
     --rot:#E20E1A;
     --dunkel:#242121;
-    --weiss:#fff
+    --weiss:#fff;
 }
 
-*{box-sizing:border-box}html,body{margin:0}
+*{
+    box-sizing:border-box;
+}
+html,body{
+    margin:0;
+}
+
 body{
     font-family:"Chewy",system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
     color:var(--weiss);
-    background:var(--weiss)
+    background:var(--weiss);
 }
 
 /* -------------------- Header ------------------------ */
@@ -20,70 +26,77 @@ body{
   top:0;
   z-index:10;
   background:var(--dunkel);
-  padding:clamp(12px,2vw,20px);
+  padding:12px;
   display:grid;
-  gap:clamp(8px,1.5vw,14px);
-  grid-template-columns:1fr auto;grid-template-areas:"title logo" "tabs date";
+  gap:8px;
+  grid-template-columns:1fr auto; /*definiert zwei Spalten: links flexibel, rechts so breit wie nötig*/
+  grid-template-areas:"title logo" "tabs date"; /* benennt die Bereiche des Grids: erste Zeile title|Logo zweite Zeile tabs|date */
 }
 
 .header-left-top{
-    grid-area:title
+    grid-area:title;
 }
 .header-right-top{
     grid-area:logo;
     display:flex;
     justify-content:flex-end;
-    align-items:center}
+    align-items:center;
+}
 .header-left-bottom{
     grid-area:tabs;
-    display:flex;gap:clamp(14px,2.4vw,22px);
+    display:flex;
+    gap:14px;
     flex-wrap:wrap;
-    align-items:center
+    align-items:center;
 }
 .header-right-bottom{
     grid-area:date;
     display:flex;
     align-items:center;
     justify-content:flex-end;
-    justify-self:end /* rechtsbündig */
+    justify-self:end;
 } 
 
 h1{
     margin:0;
     font-weight:400;
     letter-spacing:.3px;
-    font-size:clamp(20px,3.8vw,40px)}
+    font-size:20px;
+}
 
 .logo{
-    width:clamp(42px,7vw,68px);
-    height:auto}
+    width:42px;
+    height:auto;
+}
 
 /* nur angeklickte Radio Buttons rot, das andere weiss */
 .mode-check-input,.timespan-check-input{
     position:absolute;
-    opacity:0;pointer-events:none
+    opacity:0;
+    pointer-events:none;
 }
 .mode-check-label,.timespan-check-label{
     color:var(--weiss);
     cursor:pointer;
     text-decoration:underline;
-    text-underline-offset:.18em
+    text-underline-offset:.18em; /* bestimmt Abstand zur Unterstreichung */
 }
 
 .mode-check-input:checked+.mode-check-label,
 .timespan-check-input:checked+.timespan-check-label{
     color:var(--rot);
-    text-decoration-color:var(--rot)
+    text-decoration-color:var(--rot);
 }
 
 #datepicker{
-  appearance:none;
-  -webkit-appearance:none;
-  border:none;outline:none;
+  border:none;
+  outline:none;
   font:inherit;
-  background:var(--weiss);color:var(--dunkel);
+  justify-content: right;
+  background:var(--weiss);
+  color:var(--dunkel);
   padding:.55rem .9rem;border-radius:999px;
-  box-shadow:0 2px 0 rgba(0,0,0,.15)
+  box-shadow:0 2px 0 rgba(0,0,0,.15);
 }
 
 /* -------------------- Podium --------------------- */
@@ -92,67 +105,94 @@ h1{
   margin:0 auto;
   background:var(--weiss);
   color:var(--dunkel);
-  padding:clamp(16px,3vw,28px) clamp(16px,3vw,28px) 0; /* unten 0 -> buendig */
-  display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(10px,2vw,18px);
+  padding: 16px 16px 0;
+  display:grid;grid-template-columns:repeat(3,1fr);
   align-items:end;
-  min-height:clamp(420px,70vh,760px)
+  min-height:420px;
 }
 .podium article{
     display:flex;
     flex-direction:column;
     align-items:center;
     justify-content:flex-end;
-    text-align:center;margin:0;
-    align-self:end
+    text-align:center;
+    margin:0;
+    align-self:end;
 }
 
 .podium-header{
-    margin-bottom:clamp(6px,1.2vw,10px)
+    margin-bottom:6px;
 }
 .mode-title{
     margin:.2rem 0;
-    font-size:clamp(18px,3vw,30px)
+    font-size:18px;
 }
 .artist-name{
-    margin:0;font-size:clamp(12px,2.2vw,18px);
-    color: var(--dunkel)}
+    margin:0;
+    font-size:12px;
+    color: var(--dunkel);
+}
 
 /* Podium rote Fläche */
 .podium-body{
-  width:100%;background:var(--rot);
-  border:none;border-radius:4px;
-  padding:clamp(8px,1.5vw,14px);
+  width:100%;
+  background:var(--rot);
+  border:none;
+  border-radius:4px;
   display:flex;
   flex-direction:column;
   align-items:center;
   justify-content:flex-end;
-  gap:clamp(8px,1.5vw,14px);
-  overflow:hidden
+  overflow:hidden;
 }
 
 .podium-box-1 .podium-body{
-    height:clamp(260px,42vh,520px)
+    height:clamp(260px,42vh,520px);
 }
 .podium-box-2 .podium-body{
-    height:clamp(180px,30vh,380px)
+    height:clamp(180px,30vh,380px);
 }
 .podium-box-3 .podium-body{
-    height:clamp(140px,24vh,300px)
+    height:clamp(140px,24vh,300px);
 }
 .plays{
     margin:0;
     font-size:clamp(14px,2.5vw,20px);
     color:var(--weiss);
-    text-shadow:0 1px 0 rgba(0,0,0,.25)
+    text-shadow:0 1px 0 rgba(0,0,0,.25);
 }
 
 /* Sterne */
 .star{
-  width:clamp(60px,40%,120px);aspect-ratio:1/1;height:auto;background:var(--weiss);
-  border:none; /* kein schwarzer Punkt an der Spitze */
-  display:grid;place-items:center;clip-path:polygon(50% 0%,61% 35%,98% 35%,68% 57%,79% 91%,50% 70%,21% 91%,32% 57%,2% 35%,39% 35%)
+  width:clamp(60px,40%,120px);
+  aspect-ratio:1/1;
+  height:auto;
+  background:var(--weiss);
+  border:none;
+  display:grid;
+  place-items:center;
+  clip-path:polygon(50% 0%,61% 35%,98% 35%,68% 57%,79% 91%,50% 70%,21% 91%,32% 57%,2% 35%,39% 35%);
 }
-.rank-number{font-size:clamp(22px,6vw,48px);color:#000}
+.rank-number{
+    font-size:clamp(22px,6vw,48px);
+    color:var(--dunkel);
+}
 
 /* -------------------- Anpassung an kleine Bildschirme ---------------- */
-@media (max-width:420px){.header{gap:8px}.podium{gap:10px}}
+@media (min-width:600px){ 
+    .header{ padding:16px; gap:12px;} 
+    .header-left-bottom{gap:18px;} 
+    h1{ font-size:28px;}
+    .logo{ width:56px;}
+    .podium{ padding:20px 20px 0; }
+}
+@media (min-width:1024px){ 
+    .header{ padding:20px; gap:14px;} 
+    .header-left-bottom{gap:22px;} h1{font-size:40px;}
+    .logo{width:68px;}.podium{ padding:28px 28px 0; }
+    .podium{ min-height:760px; }
+    .podium-header{ margin-bottom:10px; }
+    .mode-title{ font-size:30px; }
+    .artist-name{ font-size:18px; }
+}
+@media (max-width:420px){.header{gap:8px}}
