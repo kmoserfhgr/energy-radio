@@ -2,12 +2,12 @@
 @import url("https://fonts.googleapis.com/css2?family=Chewy&display=swap");
 
 :root{
-  --rot:#6985b5;
+  --rot:#E20E1A;
   --dunkel:#242121;
   --weiss:#fff;
   --header-h: 11.25rem; /* Header-Höhe (Laptop/Default) */
 }
-teeeest
+
 *{ box-sizing:border-box; }
 
 html,body{
