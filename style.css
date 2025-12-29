@@ -134,7 +134,7 @@ h1{
 }
 .mode-title{ 
     margin:.2rem 0; 
-    font-size:1.125rem; 
+    font-size:1.5rem; 
 }
 .artist-name{ 
     margin:0; 
@@ -168,11 +168,17 @@ h1{
 }
 
 .plays{
-  margin:0;
+  margin: 0;;
   font-size:1rem;
   color:var(--weiss);
   text-shadow:0 0.0625rem 0 rgba(0,0,0,.25);
 }
+
+.podium .plays {
+  color: var(--dunkel);
+  text-shadow: none;
+}
+
 
 /* Sterne */
 .star{
