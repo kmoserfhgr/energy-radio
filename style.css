@@ -185,7 +185,7 @@ h1{
   width:6.25rem;
   aspect-ratio:1/1;
   height:auto;
-  background:var(--weiss);
+  background:var(--rot);
   border:none;
   display:grid;
   place-items:center;
