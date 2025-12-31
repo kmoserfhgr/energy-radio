@@ -1,22 +1,21 @@
 /* ---------------- Basis Einstellungen --------------- */
 @import url("https://fonts.googleapis.com/css2?family=Chewy&display=swap");
 
-
 /* -------------------- Grundaufbau ------------------------ */
 :root{
   --rot:#E20E1A;
   --dunkel:#242121;
   --weiss:#fff;
-  --header-h: 13rem; /* Header-Höhe (Laptop/Default) */
-  --intro-nudge-x: 0px;
-  --intro-nudge-y: 0px;
+  --header-h:13rem; /* Header-Höhe (Laptop/Default) */
+  --intro-nudge-x:0px;
+  --intro-nudge-y:0px;
 }
 
 *{ box-sizing:border-box; }
 
 html,body{
   margin:0;
-  height:100%;
+  min-height:100%;
 }
 
 body{
@@ -25,17 +24,17 @@ body{
   background:var(--weiss);
 }
 
+/* verhindert Interaktion während Intro */
 body.intro-active .header,
 body.intro-active .podium,
-body.intro-active #bg-video {
-  opacity: 0;
-  pointer-events: none;
+body.intro-active #bg-video{
+  opacity:0;
+  pointer-events:none;
 }
-
 
 /* -------------------- Intro ------------------------ */
 
-/* ENERGY INTRO */
+/* Fulllscreen Intro Overlay*/
 #energy-intro{
   position:fixed;
   inset:0;
@@ -45,16 +44,35 @@ body.intro-active #bg-video {
   place-items:center;
 }
 
+/*Container für Logo und Strahlen*/
 .energy-intro-inner{
   position:relative;
-  width:min(70vw, 22rem);
-  aspect-ratio:1/1;
+  width:min(70vw,22rem); /* responsive aber begrenzt*/
+  aspect-ratio:1/1; /* quadratisch*/
   display:grid;
   place-items:center;
-  transform: translate(var(--intro-nudge-x), var(--intro-nudge-y));
 }
 
-/* logo NICHT 100% (sonst wirkt svg-luft off-center) */
+/*Container für animierte Strahlen*/
+.energy-rays{
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  z-index:1;
+}
+
+/*einzelne unterschiedliche Strahlen*/
+.energy-rays span{
+  position:absolute;
+  top:50%;
+  left:50%;
+  width:3px;
+  background:#000;
+  transform-origin:50% 100%; /*vom Zentrum weg animieren*/
+  opacity:0; /*Startzustand der Animation*/
+}
+
+/* Logo bewusst kleiner*/
 .energy-intro-inner img{
   width:72%;
   height:auto;
@@ -63,67 +81,57 @@ body.intro-active #bg-video {
   z-index:2;
 }
 
-.energy-rays{
-  position:absolute;
-  inset:0;
-  pointer-events:none;
-  z-index:1;
-}
-
-.energy-rays span{
-  position:absolute;
-  top:50%;
-  left:50%;
-  width:3px;
-  background:#000;
-  transform-origin:50% 100%;
-  opacity:0;
-}
-
-
 /* -------------------- Header ------------------------ */
 .header{
   position:sticky;
   top:0;
   z-index:10;
   background:var(--dunkel);
-  min-height: var(--header-h);
-  padding: 1.5rem;
+  min-height:var(--header-h);
+  padding:1.5rem;
   display:grid;
   gap:1rem;
   grid-template-columns:1fr auto;
-  grid-template-areas:"title logo" "tabs date";
+  grid-template-areas:
+    "title logo"
+    "tabs date";
 }
 
-.header-left-top{ 
-    grid-area:title;
-    padding: 1.5rem;
+/*Container für Titel*/
+.header-left-top{
+  grid-area:title;
+  padding:1.5rem;
 }
 
+/*Bereich für Energy Logo rechts oben*/
 .header-right-top{
-  height: 100%;
   grid-area:logo;
   display:flex;
   justify-content:flex-end;
   align-items:center;
-  padding: 0rem 1.5rem 0rem 0rem;
-  z-index: 20;
+  padding:0 1.5rem 0 0;
+  z-index:20;
 }
+
+/*Modus und Zeitraum Auswahl*/
 .header-left-bottom{
+  grid-area:tabs;
   display:flex;
   gap:1.75rem;
   flex-wrap:wrap;
   align-items:center;
-  padding: 1.5rem;
+  padding:1.5rem;
 }
+
+/*Button für Auswahl Datum*/
 .header-right-bottom{
   grid-area:date;
   display:flex;
   align-items:center;
   justify-content:flex-end;
   justify-self:end;
-  padding: 1.5rem;
-} 
+  padding:1.5rem;
+}
 
 h1{
   margin:0;
@@ -132,45 +140,50 @@ h1{
   font-size:1.25rem;
 }
 
-.logo{ 
-  height: 100%;
-  width: auto;
-  max-height: 6rem; /* Sicherheitslimit */ 
+.logo{
+  width:auto;
+  height:100%;
+  max-height:6rem;
 }
 
-/* nur angeklickte Radio-Buttons rot */
-.mode-check-input,.timespan-check-input{
+/* ---------------- Auswahl-Buttons für Modus und Zeitraum ---------------- */
+.mode-check-input,
+.timespan-check-input{
   position:absolute;
   opacity:0;
   pointer-events:none;
 }
-.mode-check-label,.timespan-check-label{
+
+.mode-check-label,
+.timespan-check-label{
   color:var(--weiss);
   cursor:pointer;
   text-decoration:underline;
   text-underline-offset:.18em;
 }
 
-/* Artist & Songs → bleiben h1-gross (nichts überschreiben) */
 .mode-check-label{
-  font-size: inherit;
+  font-size:inherit;
 }
 
 .timespan-check-label{
-  font-size: 1.45rem;
+  font-size:1.45rem;
 }
 
-.mode-check-input:checked+.mode-check-label,
-.timespan-check-input:checked+.timespan-check-label{
+/*aktiver Zustand mit roter Farbe und Unterstreichung markiert*/
+.mode-check-input:checked + .mode-check-label,
+.timespan-check-input:checked + .timespan-check-label{
   color:var(--rot);
   text-decoration-color:var(--rot);
 }
 
-/* Kalender */
+/* ----- Kalender ------ */
 #datepicker{
   border:none;
   outline:none;
-  font:inherit;
+  font-family:inherit;
+  font-size:inherit;
+  line-height:normal;
   background:var(--weiss);
   color:var(--dunkel);
   padding:.55rem .9rem;
@@ -178,13 +191,14 @@ h1{
   box-shadow:0 0.125rem 0 rgba(0,0,0,.15);
 }
 
+
 /* -------------------- Podium --------------------- */
 .podium{
-  position: sticky;
-  z-index: 10;
+  position:sticky;
+  z-index:10;
   max-width:68.75rem;
   margin:0 auto;
-  background:var(--transparent);
+  background:transparent;
   color:var(--dunkel);
   padding:1rem 1rem 0;
   display:grid;
@@ -192,10 +206,15 @@ h1{
   align-items:end;
   height:calc(100vh - var(--header-h));
 }
-@supports (height: 100svh){
-  .podium{ height:calc(100svh - var(--header-h)); }
+
+/*Viewport-Höhe wird unterstützt*/
+@supports (height:100svh){
+  .podium{
+    height:calc(100svh - var(--header-h));
+  }
 }
 
+/*einzelner Podestplatz*/
 .podium article{
   display:flex;
   flex-direction:column;
@@ -204,27 +223,31 @@ h1{
   text-align:center;
   margin:0;
   align-self:end;
+  opacity:0; /*Start für Animation*/
+  transform:translateY(120px);
 }
 
-.podium-header{ 
-    margin-bottom:0.375rem; 
-}
-.mode-title{ 
-    margin:.2rem 0; 
-    font-size:1.5rem; 
-}
-.artist-name{ 
-    margin:0; 
-    font-size:0.75rem; 
-    color:var(--dunkel); 
+.podium-header{
+  margin-bottom:.375rem;
 }
 
-/* Podium rote Fläche */
+.mode-title{
+  margin:.2rem 0;
+  font-size:1.5rem;
+}
+
+.artist-name{
+  margin:0;
+  font-size:.75rem;
+  color:var(--dunkel);
+}
+
+/* Podium Body */
 .podium-body{
   width:100%;
   background:var(--rot);
-  border:0.0625rem solid #000;
-  border-radius:0.45rem 0.45rem 0 0;
+  border:.0625rem solid #000;
+  border-radius:.45rem .45rem 0 0;
   display:flex;
   flex-direction:column;
   align-items:center;
@@ -233,49 +256,47 @@ h1{
   min-height:10rem;
 }
 
-/* dynamische Höhen relativ zu (Viewport − Header) */
-.podium-box-1 .podium-body{ height: 62%; }
-.podium-box-2 .podium-body{ height: 46%; }
-.podium-box-3 .podium-body{ height: 34%; }
+/*relative Höhen je nach Bildschirm Platz*/
+.podium-box-1 .podium-body{ height:62%; }
+.podium-box-2 .podium-body{ height:46%; }
+.podium-box-3 .podium-body{ height:34%; }
 
-@supports (height: 100svh){
-  .podium-box-1 .podium-body{ height:calc((100svh - var(--header-h)) * 0.62); }
-  .podium-box-2 .podium-body{ height:calc((100svh - var(--header-h)) * 0.46); }
-  .podium-box-3 .podium-body{ height:calc((100svh - var(--header-h)) * 0.34); }
+/*dynamische Höhen bei Browsern*/
+@supports (height:100svh){
+  .podium-box-1 .podium-body{ height:calc((100svh - var(--header-h)) * .62); }
+  .podium-box-2 .podium-body{ height:calc((100svh - var(--header-h)) * .46); }
+  .podium-box-3 .podium-body{ height:calc((100svh - var(--header-h)) * .34); }
 }
 
+/*Anzahl Abspielungen*/
 .plays{
   margin:0;
-  font-size:clamp(1rem, 3.5vw, 1.5rem);
-  color:var(--weiss);
-  text-shadow:0 0.0625rem 0 rgba(0,0,0,.25);
-}
-
-.podium .plays {
-  color: var(--dunkel);
-  text-shadow: none;
+  font-size:clamp(1rem,3.5vw,1.5rem);
+  color:var(--dunkel);
+  text-shadow:none;
 }
 
 /* Sterne */
 .star{
-  width:clamp(5.25rem, 22vw, 9rem);
+  width:clamp(5.25rem,22vw,9rem);
   aspect-ratio:1/1;
   background:var(--weiss);
   display:grid;
   place-items:center;
-  clip-path:polygon(50% 0%,61% 35%,98% 35%,68% 57%,79% 91%,50% 70%,21% 91%,32% 57%,2% 35%,39% 35%);
-}
-.rank-number{ font-size:2.5rem; color:var(--dunkel); }
-
-/* Animation des Podiums*/
-.podium article{
-  opacity: 0;
-  transform: translateY(120px);
+  clip-path:polygon(
+    50% 0%,61% 35%,98% 35%,68% 57%,79% 91%,
+    50% 70%,21% 91%,32% 57%,2% 35%,39% 35%
+  );
 }
 
-/* Konfetti-Video im Hintergrund */
-#bg-video {
-  position: fixed;
+.rank-number{
+  font-size:2.5rem;
+  color:var(--dunkel);
+}
+
+/* Konfetti-Hintergrundvideo */
+#bg-video{
+  position:fixed;
   inset:0;
   width:100vw;
   height:100vh;
@@ -284,32 +305,62 @@ h1{
   pointer-events:none;
 }
 
-/* -------------------- Anpassung an mittlere/grosse Bildschirme ---------------- */
+/* Stern auf Podium 1 soll vibrieren wegen Song */
+@keyframes musicbox-pulse {
+  0% {
+    transform: scale(1) rotate(0deg);
+  }
+  20% {
+    transform: scale(1.08) rotate(-4deg);
+  }
+  40% {
+    transform: scale(1.02) rotate(0deg);
+  }
+  60% {
+    transform: scale(1.1) rotate(4deg);
+  }
+  80% {
+    transform: scale(1.03) rotate(0deg);
+  }
+  100% {
+    transform: scale(1) rotate(0deg);
+  }
+}
+ 
+.podium-box-1.is-playing .star { /*nur bei aktivem Song auf Podest 1*/
+  animation: musicbox-pulse 1.7s cubic-bezier(0.34, 1.56, 0.64, 1) infinite;
+  transform-origin: 50% 60%;
+}
+
+
+/* -------------------- Breakpoints ---------------- */
+/*I-Pads und aufwärts*/
 @media (min-width:37.5rem){
   h1{ font-size:1.75rem; }
 }
 
+/*Desktop*/
 @media (min-width:64rem){
   h1{ font-size:2.5rem; }
   .mode-title{ font-size:1.875rem; }
   .artist-name{ font-size:1.125rem; }
 }
 
-/* -------------------- Smartphone (schmal) ---------------- */
+/* -------------------- Smartphone ---------------- */
 @media (max-width:30rem){
-   :root{
-    --intro-nudge-x: 0px;
-    --intro-nudge-y: -8px;
+  /*Anpassung Intro auf kleinen Screens*/
+  :root{
+    --intro-nudge-y:-8px;
   }
 
   .energy-intro-inner{
-    width:min(78vw, 18rem);
+    width:min(78vw,18rem);
+    transform:scale(.65);
   }
-
 
   .header{
     padding:1rem;
-    gap:0.75rem;
+    gap:.75rem;
     grid-template-columns:1fr;
     grid-template-areas:
       "logo"
@@ -321,75 +372,49 @@ h1{
   }
 
   .header-left-top{
-    padding:0.25rem 0;
-    justify-self:center;
-    text-align:center;
+    padding:.25rem 0;
   }
 
   h1{
     font-size:1.5rem;
-    margin-top:0;
   }
 
   .header-left-bottom{
-  flex-direction:row;
-  align-items:center;
-  gap:1.5rem;
-  padding:0.25rem 0;
-  justify-content:center;
-  justify-self:center;
-  margin-bottom:var(--header-gap);
-}
-
-.header-right-top{
-  position:static;
-  width:100%;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  padding:0;
-  margin-bottom:var(--header-gap);
-}
-
-.header-right-top .logo{
-  margin:0 auto;
-  display:block;
-  padding-bottom: 0.35rem;
-}
-
-.header-right-bottom{
-  display:flex;
-  justify-content:center;
-  width:100%;
-  padding-bottom: 0.45rem;
-  padding-top: 0.45rem;
-}
-
-.timespan-check-label{
-    font-size:1.2rem;
+    flex-direction:row;
+    gap:1.5rem;
+    padding:.25rem 0;
     justify-content:center;
-    align-items:center;
   }
 
-.logo{ 
-    width:3rem;
-    position:static;
+  .header-right-top{
     justify-content:center;
-   padding:0;
-   }
-  
+    padding:0;
+  }
 
-#datepicker{
-  padding:.2rem .75rem;
-  font-size:0.95rem;
-  margin:0 auto;
+  .logo{
+    width:3rem;
+    height:auto;
+  }
 
+  .header-right-bottom{
+    justify-content:center;
+    width:100%;
+    padding:.45rem 0;
+  }
+
+  .timespan-check-label{
+    font-size:1.2rem;
+  }
+
+  #datepicker{
+    padding:.2rem .75rem;
+    font-size:.95rem;
+    min-height:2.25rem;
+    margin:0 auto;
+  }
 }
 
+/*sehr kleine Geräte*/
 @media (max-width:26.25rem){
-  .header{ gap:0.4rem; }
-}
-
-.energy-intro-inner{
-    transform: scale(0.65);}
+  .header{ gap:.4rem; }
 }
